@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/login', (req, res) => {
     const { email, password } = req.body;
-  
+
     connection.query(
       'SELECT * FROM users WHERE email = ? AND password = ?',
       [email, password],
@@ -22,7 +22,7 @@ app.post('/login', (req, res) => {
           res.status(500).send('Server error');
           return;
         }
-  
+
         if (results.length === 0) {
           res.status(401).send('Invalid email or password');
         } else {
@@ -94,7 +94,7 @@ app.delete('/api/product/:batchNumber', async (req, res) => {
       }
     });
   });
-  
+
   app.delete('/api/inventory/:product_name', (req, res) => {
     const { product_name } = req.params;
     connection.query('DELETE FROM inventory_management WHERE product_name = ?', [product_name], (error, results) => {
